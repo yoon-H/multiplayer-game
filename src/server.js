@@ -1,5 +1,6 @@
 import net from 'net';
-import initServer from './init';
+import initServer from './init.js';
+import { config } from './config/config.js';
 
 const PORT = 5555;
 
@@ -21,7 +22,7 @@ const server = net.createServer((socket) => {
 
 initServer()
   .then(() => {
-    server.listen(PORT, () => {
+    server.listen(config.server.port, config, () => {
       console.log(`Echo server listening on port ${PORT}`);
       console.log(server.address());
     });

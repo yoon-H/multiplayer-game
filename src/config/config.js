@@ -1,5 +1,5 @@
-import { CLIENT_VERSION, PORT } from '../constants.js/env';
-import { PACKET_TYPE_LENGTH, TOTAL_LENGTH } from '../constants.js/header';
+import { CLIENT_VERSION, PORT } from '../constants.js/env.js';
+import { PACKET_TYPE_LENGTH, TOTAL_LENGTH } from '../constants.js/header.js';
 
 export const config = {
   server: {
