@@ -1,0 +1,8 @@
+syntax = "proto3";
+
+message commonPacket {
+  uint32 handlerId = 1;     // 핸들러 ID (4바이트)
+  string userId = 2;        // 유저 아이디 (uuid)
+  string version = 3;       // 클라이언트 버전
+  bytes payload = 4;        // 실제 데이터
+}
