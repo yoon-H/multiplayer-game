@@ -1,5 +1,7 @@
 syntax = "proto3";
 
+package response;
+
 message Response {
   uint32 handlerId = 1;         // 핸들러 아이디(4바이트)
   uint32 responseCode = 2;      // 응답코드 TODO

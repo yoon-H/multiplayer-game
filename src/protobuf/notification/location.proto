@@ -1,5 +1,7 @@
 syntax = "proto3";
 
+package location;
+
 message LocationUpdate {
   repeated UserLocation users = 1;
 }
@@ -9,4 +11,9 @@ message UserLocation {
     uint32 playerId = 2;    // 플레이어 아이디
     float x = 3;            // x 좌표
     float y = 4;            // y 좌표
+}
+
+message LocationUpdatePayload {
+  float x = 1;      // x 좌표
+  float y = 2;      // y 좌표
 }
