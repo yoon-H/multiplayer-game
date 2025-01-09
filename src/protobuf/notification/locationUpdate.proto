@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+message LocationUpdate {
+  repeated UserLocation users = 1;
+}
+
+message UserLocation {
+    string id = 1;          // 아이디? TODO
+    uint32 playerId = 2;    // 플레이어 아이디
+    float x = 3;            // x 좌표
+    float y = 4;            // y 좌표
+}
