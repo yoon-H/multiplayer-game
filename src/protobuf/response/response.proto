@@ -1,0 +1,8 @@
+syntax = "proto3";
+
+message Response {
+  uint32 handlerId = 1;         // 핸들러 아이디(4바이트)
+  uint32 responseCode = 2;      // 응답코드 TODO
+  uint64 timestamp = 3;         // 타임 스탬프
+  bytes data = 4;               // 실제 데이터
+}
