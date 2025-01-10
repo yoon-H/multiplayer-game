@@ -26,24 +26,26 @@ export const onData = (socket) => async (data) => {
       console.log(`packetType: ${packetType}`);
       console.log(packet);
 
-      switch (packetType) {
-        case PACKET_TYPE.PING:
-          break;
-        case PACKET_TYPE.NORMAL:
-          const { handlerId, userId, payload } = packetParser(data);
+      try {
+        switch (packetType) {
+          case PACKET_TYPE.PING:
+            break;
+          case PACKET_TYPE.NORMAL:
+            const { handlerId, userId, payload } = packetParser(packet);
 
-          const handler = getHandlerById(handlerId);
-          await handler({
-            socket,
-            userId,
-            payload,
-          });
+            const handler = getHandlerById(handlerId);
+            await handler({
+              socket,
+              userId,
+              payload,
+            });
+        }
+      } catch (error) {
+        handleError(socket, error);
       }
     } else {
-      // 전체 패킷이 도착하지 않아서 break
       break;
     }
   }
-
   console.log(data);
 };
