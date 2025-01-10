@@ -2,7 +2,7 @@ import { PACKET_TYPE } from '../constants.js/header.js';
 import { packetParser } from '../utils/parser/packetParser.js';
 import { config } from '../config/config.js';
 
-export const onData = (socket) => (data) => {
+export const onData = (socket) => async (data) => {
   // 버퍼에 수신 데이터 추가
   socket.buffer = Buffer.concat([socket.buffer, data]);
 
@@ -32,9 +32,12 @@ export const onData = (socket) => (data) => {
         case PACKET_TYPE.NORMAL:
           const { handlerId, userId, payload } = packetParser(data);
 
-          console.log('handerId:', handlerId);
-          console.log('userId:', userId);
-          console.log('payload:', payload);
+          const handler = getHandlerById(handlerId);
+          await handler({
+            socket,
+            userId,
+            payload,
+          });
       }
     } else {
       // 전체 패킷이 도착하지 않아서 break
