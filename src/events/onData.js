@@ -1,3 +1,7 @@
+import { PACKET_TYPE } from '../constants.js/header.js';
+import { packetParser } from '../utils/parser/packetParser.js';
+import { config } from '../config/config.js';
+
 export const onData = (socket) => (data) => {
   // 버퍼에 수신 데이터 추가
   socket.buffer = Buffer.concat([socket.buffer, data]);
@@ -21,6 +25,17 @@ export const onData = (socket) => (data) => {
       console.log(`length : ${length}`);
       console.log(`packetType: ${packetType}`);
       console.log(packet);
+
+      switch (packetType) {
+        case PACKET_TYPE.PING:
+          break;
+        case PACKET_TYPE.NORMAL:
+          const { handlerId, userId, payload } = packetParser(data);
+
+          console.log('handerId:', handlerId);
+          console.log('userId:', userId);
+          console.log('payload:', payload);
+      }
     } else {
       // 전체 패킷이 도착하지 않아서 break
       break;
