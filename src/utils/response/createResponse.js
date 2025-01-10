@@ -1,5 +1,5 @@
 import { config } from '../../config/config.js';
-import { PACKET_TYPE } from '../../constants.js/header.js';
+import { PACKET_TYPE } from '../../constants/header.js';
 import { getProtoMessages } from '../../init/loadProtos.js';
 
 export const createResponse = (handlerId, responseCode, data = null, userId) => {

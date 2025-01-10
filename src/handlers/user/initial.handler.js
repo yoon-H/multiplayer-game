@@ -1,9 +1,18 @@
-const initialHandler = async({socket, userId, payload}) => {
-    const {deviceId} = payload;
+import HANDLER_IDS, { RESPONSE_SUCCESS_CODE } from '../../constants/handlerIds.js';
 
-    addUser(socket, deviceId);
+const initialHandler = async ({ socket, userId, payload }) => {
+  const { deviceId } = payload;
 
-    socket,write("");
+  addUser(socket, deviceId);
+
+  const initialResponse = createResponse(
+    HANDLER_IDS.INITIAL,
+    RESPONSE_SUCCESS_CODE,
+    { userId: deviceId },
+    deviceId,
+  );
+
+  socket, write(initialResponse);
 };
 
 export default initialHandler;
