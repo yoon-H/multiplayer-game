@@ -10,8 +10,10 @@ export const createResponse = (handlerId, responseCode, data = null, userId) => 
     handlerId,
     responseCode,
     timestamp: Date.now(),
-    date: data ? Buffer.from(JSON.stringify(data)) : null, // 문자열화해서 버퍼객체로 만들기
+    data: data ? Buffer.from(JSON.stringify(data)) : null, // 문자열화해서 버퍼객체로 만들기
   };
+
+  console.log('response', handlerId, Date.now());
 
   const buffer = Response.encode(responsePayload).finish();
 

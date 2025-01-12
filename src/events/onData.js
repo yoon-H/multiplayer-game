@@ -63,5 +63,4 @@ export const onData = (socket) => async (data) => {
       break;
     }
   }
-  console.log(data);
 };
