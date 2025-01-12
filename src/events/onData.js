@@ -1,6 +1,7 @@
 import { PACKET_TYPE } from '../constants/header.js';
 import { packetParser } from '../utils/parser/packetParser.js';
 import { config } from '../config/config.js';
+import { getProtoMessages } from '../init/loadProtos.js';
 
 export const onData = (socket) => async (data) => {
   // 버퍼에 수신 데이터 추가
@@ -29,9 +30,21 @@ export const onData = (socket) => async (data) => {
       try {
         switch (packetType) {
           case PACKET_TYPE.PING:
+            {
+              const protoMessages = getProtoMessages();
+              const Ping = protoMessages.common.Ping;
+              const pingMessage = Ping.decode(packet);
+              const user = getUserById(socket.userId);
+              if (!user) {
+                throw new CustomError(ErrorCodes.USER_NOT_FOUND, '유저를 찾을 수 없습니다.');
+              }
+              user.handlePong(pingMessage);
+            }
             break;
           case PACKET_TYPE.NORMAL:
             const { handlerId, userId, payload } = packetParser(packet);
+
+            if (!socket.userId) socket.userId = userId;
 
             const handler = getHandlerById(handlerId);
             await handler({

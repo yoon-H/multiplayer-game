@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package location;
+package gameNotification;
 
 message LocationUpdate {
   repeated UserLocation users = 1;
@@ -13,7 +13,8 @@ message UserLocation {
     float y = 4;            // y 좌표
 }
 
-message LocationUpdatePayload {
-  float x = 1;      // x 좌표
-  float y = 2;      // y 좌표
+// 게임 시작 알림
+message Start {
+  string gameId = 1;
+  int64 timestamp = 2;
 }
