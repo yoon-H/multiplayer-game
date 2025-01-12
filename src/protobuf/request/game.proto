@@ -16,6 +16,6 @@ message JoinGamePayload {
 // 위치 정보 업데이트
 message LocationUpdatePayload {
   string gameId = 1;
-  float x = 1;      // x 좌표
-  float y = 2;      // y 좌표
+  float x = 2;      // x 좌표
+  float y = 3;      // y 좌표
 }

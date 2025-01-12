@@ -1,5 +1,5 @@
 import { getGameSession } from '../../session/game.session.js';
-import { handleError } from '../../utils/error/errorHandler.js';
+import { handleError } from '../../utils/error/error.handler.js';
 import CustomError from '../../utils/error/customError.js';
 import { ErrorCodes } from '../../utils/error/errorCodes.js';
 

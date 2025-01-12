@@ -1,7 +1,7 @@
 import { v4 as uuidv4 } from 'uuid';
 import { addGameSession } from '../../session/game.session.js';
 import { createResponse } from '../../utils/response/createResponse.js';
-import { handleError } from '../../utils/error/errorHandler.js';
+import { handleError } from '../../utils/error/error.handler.js';
 import { HANDLER_IDS, RESPONSE_SUCCESS_CODE } from '../../constants/handlerIds.js';
 import { getUserById } from '../../session/user.session.js';
 import CustomError from '../../utils/error/customError.js';
