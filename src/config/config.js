@@ -11,6 +11,7 @@ import {
   DB2_PASSWORD,
   DB2_HOST,
   DB2_PORT,
+  DB1_PORT,
 } from '../constants/env.js';
 import { PACKET_TYPE_LENGTH, TOTAL_LENGTH } from '../constants/header.js';
 

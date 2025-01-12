@@ -1,4 +1,4 @@
-import { PACKET_TYPE } from '../constants.js/header.js';
+import { PACKET_TYPE } from '../constants/header.js';
 import { packetParser } from '../utils/parser/packetParser.js';
 import { config } from '../config/config.js';
 

@@ -1,4 +1,4 @@
-import { HANDLER_IDS } from '../constants.js/handlerIds.js';
+import { HANDLER_IDS } from '../constants/handlerIds.js';
 import initialHandler from './user/initial.handler.js';
 
 const handlers = {

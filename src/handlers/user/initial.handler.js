@@ -1,7 +1,7 @@
 import { HANDLER_IDS, RESPONSE_SUCCESS_CODE } from '../../constants/handlerIds.js';
 import { createResponse } from '../../utils/response/createResponse.js';
 import { addUser } from '../../session/user.session.js';
-import { handleError } from '../../utils/error/errorHandler.js';
+import { handleError } from '../../utils/error/error.handler.js';
 
 const initialHandler = async ({ socket, userId, payload }) => {
   try {
