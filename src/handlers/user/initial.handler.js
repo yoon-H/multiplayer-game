@@ -7,7 +7,15 @@ const initialHandler = async ({ socket, userId, payload }) => {
   try {
     const { deviceId } = payload;
 
-    addUser(socket, deviceId);
+    let user = await findUserByDeviceID(deviceId);
+
+    if (!user) {
+      user = await createUser(deviceId);
+    } else {
+      await updateUserLogin(user.id);
+    }
+
+    addUser(socket, user.id);
 
     // 유저 정보 응답 생성
     const initialResponse = createResponse(
