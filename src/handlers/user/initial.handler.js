@@ -2,6 +2,8 @@ import { HANDLER_IDS, RESPONSE_SUCCESS_CODE } from '../../constants/handlerIds.j
 import { createResponse } from '../../utils/response/createResponse.js';
 import { addUser } from '../../session/user.session.js';
 import { handleError } from '../../utils/error/error.handler.js';
+import { findUserByDeviceID } from '../../db/user/user.db.js';
+import { createUser } from '../../db/user/user.db.js';
 
 const initialHandler = async ({ socket, userId, payload }) => {
   try {
@@ -19,11 +21,14 @@ const initialHandler = async ({ socket, userId, payload }) => {
 
     // 유저 정보 응답 생성
     const initialResponse = createResponse(
-      HANDLER_IDS.INITIAL,
-      RESPONSE_SUCCESS_CODE,
-      { userId: deviceId },
-      deviceId,
-    );
+      HANDLER_IDS.INITIAL, 
+      RESPONSE_SUCCESS_CODE, 
+      Date.now(), {
+      x: 0,
+      y: 0,
+    });
+
+    console.log("initialResponse : ", initialResponse);
 
     // 소켓을 통해 클라이언트에게 응답 메시지 전송
     socket.write(initialResponse);

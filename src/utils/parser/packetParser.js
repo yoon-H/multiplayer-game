@@ -2,6 +2,7 @@ import { getProtoTypeNameByHandlerId } from '../../handlers/index.js';
 import { getProtoMessages } from '../../init/loadProtos.js';
 import CustomError from '../error/customError.js';
 import { ErrorCodes } from '../error/errorCodes.js';
+import { config } from '../../config/config.js';
 
 export const packetParser = (data) => {
   const protoMessages = getProtoMessages();
@@ -33,8 +34,18 @@ export const packetParser = (data) => {
     throw new CustomError(ErrorCodes.UNKNOWN_HANDLER_ID, `알 수 없는 핸들러 ID: ${handlerId}`);
   }
 
-  const [namesapce, typeName] = protoTypeName.split('.');
-  const PayloadType = protoMessages[namesapce][typeName];
+  console.log(`data : ${data}`);
+  console.log(`handlerId : `, packet.handlerId);
+  console.log(`protoTypeName : ${protoTypeName}`);
+  console.log(`packet : `, packet);
+  console.log(`packet.payload : ${packet.payload}`);
+
+  const [namespace, typeName] = protoTypeName.split('.');
+  const PayloadType = protoMessages[namespace][typeName];
+
+  console.log(`PayloadType : ${namespace}.${typeName}`);
+
+
   let payload;
   try {
     payload = PayloadType.decode(packet.payload);

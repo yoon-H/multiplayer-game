@@ -2,6 +2,8 @@ import { PACKET_TYPE } from '../constants/header.js';
 import { packetParser } from '../utils/parser/packetParser.js';
 import { config } from '../config/config.js';
 import { getProtoMessages } from '../init/loadProtos.js';
+import { handleError } from '../utils/error/error.handler.js';
+import { getHandlerById } from '../handlers/index.js';
 
 export const onData = (socket) => async (data) => {
   // 버퍼에 수신 데이터 추가
@@ -25,6 +27,7 @@ export const onData = (socket) => async (data) => {
 
       console.log(`length : ${length}`);
       console.log(`packetType: ${packetType}`);
+      console.log(data);
       console.log(packet);
 
       try {
