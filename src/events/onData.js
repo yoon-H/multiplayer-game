@@ -1,8 +1,11 @@
-import { PACKET_TYPE } from '../constants.js/header.js';
+import { PACKET_TYPE } from '../constants/header.js';
 import { packetParser } from '../utils/parser/packetParser.js';
 import { config } from '../config/config.js';
+import { getProtoMessages } from '../init/loadProtos.js';
+import { handleError } from '../utils/error/error.handler.js';
+import { getHandlerById } from '../handlers/index.js';
 
-export const onData = (socket) => (data) => {
+export const onData = (socket) => async (data) => {
   // 버퍼에 수신 데이터 추가
   socket.buffer = Buffer.concat([socket.buffer, data]);
 
@@ -24,23 +27,41 @@ export const onData = (socket) => (data) => {
 
       console.log(`length : ${length}`);
       console.log(`packetType: ${packetType}`);
+      console.log(data);
       console.log(packet);
 
-      switch (packetType) {
-        case PACKET_TYPE.PING:
-          break;
-        case PACKET_TYPE.NORMAL:
-          const { handlerId, userId, payload } = packetParser(data);
+      try {
+        switch (packetType) {
+          case PACKET_TYPE.PING:
+            {
+              const protoMessages = getProtoMessages();
+              const Ping = protoMessages.common.Ping;
+              const pingMessage = Ping.decode(packet);
+              const user = getUserById(socket.userId);
+              if (!user) {
+                throw new CustomError(ErrorCodes.USER_NOT_FOUND, '유저를 찾을 수 없습니다.');
+              }
+              user.handlePong(pingMessage);
+            }
+            break;
+          case PACKET_TYPE.NORMAL:
+            const { handlerId, userId, payload } = packetParser(packet);
 
-          console.log('handerId:', handlerId);
-          console.log('userId:', userId);
-          console.log('payload:', payload);
+            if (!socket.userId) socket.userId = userId;
+
+            const handler = getHandlerById(handlerId);
+            await handler({
+              socket,
+              userId,
+              payload,
+            });
+        }
+      } catch (error) {
+        handleError(socket, error);
       }
     } else {
-      // 전체 패킷이 도착하지 않아서 break
       break;
     }
   }
-
   console.log(data);
 };

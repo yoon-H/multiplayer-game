@@ -8,3 +8,8 @@ message CommonPacket {
   string version = 3;       // 클라이언트 버전
   bytes payload = 4;        // 실제 데이터
 }
+
+// Ping 메시지
+message Ping {
+  int64 timestamp = 1;       // Ping 타임스탬프
+}
