@@ -65,7 +65,9 @@ class Game {
     let locationData = [];
     this.users.forEach((user) => {
       const { x, y } = user.calculatePosition(maxLatency);
-      locationData.push({ id: user.id, x, y });
+      const { playerId } = user.getPlayerId();
+      //console.log('location : ', user.id, playerId, x, y);
+      locationData.push({ id: user.id, playerId, x, y });
     });
 
     return createLocationPacket(locationData);

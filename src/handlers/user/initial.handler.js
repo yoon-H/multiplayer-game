@@ -7,7 +7,7 @@ import { createUser, updateUserLogin } from '../../db/user/user.db.js';
 
 const initialHandler = async ({ socket, userId, payload }) => {
   try {
-    const { deviceId } = payload;
+    const { deviceId, playerId, latency } = payload;
 
     let user = await findUserByDeviceID(deviceId);
 
@@ -17,7 +17,7 @@ const initialHandler = async ({ socket, userId, payload }) => {
       await updateUserLogin(user.id);
     }
 
-    addUser(socket, user.id);
+    addUser(socket, user.id, playerId);
 
     // 유저 정보 응답 생성
     const initialResponse = createResponse(
