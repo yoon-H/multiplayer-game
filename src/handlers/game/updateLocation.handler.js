@@ -6,6 +6,9 @@ import { ErrorCodes } from '../../utils/error/errorCodes.js';
 const updateLocationHandler = ({ socket, userId, payload }) => {
   try {
     const { gameId, x, y } = payload;
+
+    console.log('payLoad : ', payload);
+
     const gameSession = getGameSession(gameId);
 
     if (!gameSession) {

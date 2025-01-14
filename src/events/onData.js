@@ -4,6 +4,8 @@ import { config } from '../config/config.js';
 import { getProtoMessages } from '../init/loadProtos.js';
 import { handleError } from '../utils/error/error.handler.js';
 import { getHandlerById } from '../handlers/index.js';
+import { getUserById } from '../session/user.session.js';
+import CustomError from '../utils/error/customError.js';
 
 export const onData = (socket) => async (data) => {
   // 버퍼에 수신 데이터 추가
@@ -63,5 +65,4 @@ export const onData = (socket) => async (data) => {
       break;
     }
   }
-  console.log(data);
 };
