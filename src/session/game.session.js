@@ -3,7 +3,7 @@ import Game from '../classes/models/game.class.js';
 
 export const addGameSession = (id) => {
   const session = new Game(id);
-  gameSessions.push(id, session);
+  gameSessions.set(id, session);
   return session;
 };
 
@@ -15,6 +15,9 @@ export const removeGameSession = (id) => {
 };
 
 export const getGameSession = (id) => {
+  console.log(id);
+  console.log(gameSessions);
+
   return gameSessions.get(id);
 };
 

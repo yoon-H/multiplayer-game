@@ -18,6 +18,8 @@ const createGameHandler = ({ socket, userId, payload }) => {
     }
     gameSession.addUser(user);
 
+    console.log('gameSession : ', gameSession);
+
     const createGameResponse = createResponse(
       HANDLER_IDS.CREATE_GAME,
       RESPONSE_SUCCESS_CODE,

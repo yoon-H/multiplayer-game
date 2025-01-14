@@ -23,7 +23,7 @@ const initialHandler = async ({ socket, userId, payload }) => {
     const initialResponse = createResponse(
       HANDLER_IDS.INITIAL,
       RESPONSE_SUCCESS_CODE,
-      { x: 0, y: 0 },
+      { userId: user.id, x: 0, y: 0 },
       user.id,
     );
 

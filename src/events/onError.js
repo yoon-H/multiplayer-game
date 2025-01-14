@@ -1,5 +1,6 @@
 import { handleError } from '../utils/error/error.handler.js';
 import { removeUser } from '../session/user.session.js';
+import CustomError from '../utils/error/customError.js';
 
 export const onError = (socket) => (err) => {
   console.error('소켓 오류:', err);

@@ -9,7 +9,7 @@ const MAX_PLAYERS = 2;
 class Game {
   constructor(id) {
     this.id = id;
-    this.users = [];
+    this.users = new Map();
     this.intervalManager = new IntervalManager();
     this.state = 'waiting'; // 'waiting', 'inProgress'
   }
@@ -63,7 +63,7 @@ class Game {
     const maxLatency = this.getMaxLatency();
 
     let locationData = [];
-    this.users.map((user) => {
+    this.users.forEach((user) => {
       const { x, y } = user.calculatePosition(maxLatency);
       locationData.push({ id: user.id, x, y });
     });

@@ -1,5 +1,6 @@
 import { getProtoMessages } from '../../init/loadProtos.js';
 import { config } from '../../config/config.js';
+import { PACKET_TYPE } from '../../constants/header.js';
 
 const makeNotification = (message, type) => {
   // 패킷 길이 정보를 포함한 버퍼 생성
@@ -29,7 +30,7 @@ export const createPingPacket = (timestamp) => {
 
 export const createLocationPacket = (users) => {
   const protoMessages = getProtoMessages();
-  const Location = protoMessages.gameNotification.LocationUpdate;
+  const Location = protoMessages.notification.LocationUpdate;
 
   const payload = { users };
   const message = Location.create(payload);
