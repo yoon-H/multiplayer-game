@@ -15,6 +15,11 @@ class User {
     return this.playerId;
   }
 
+  initInfo(x, y, playerId) {
+    updatePosition(x, y);
+    this.playerId = playerId;
+  }
+
   updatePosition(x, y) {
     this.x = x;
     this.y = y;

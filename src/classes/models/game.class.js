@@ -11,7 +11,7 @@ class Game {
     this.id = id;
     this.users = new Map();
     this.intervalManager = new IntervalManager();
-    this.state = 'waiting'; // 'waiting', 'inProgress'
+    this.state = 'waiting'; // 'waiting', 'inProgress', 'dead'
   }
 
   addUser(user) {
@@ -38,7 +38,13 @@ class Game {
 
     if (this.users.length < MAX_PLAYERS) {
       this.state = 'waiting';
+    } else if (this.users.length <= 0) {
+      this.state = 'dead';
     }
+  }
+
+  getState() {
+    return this.state;
   }
 
   getMaxLatency() {

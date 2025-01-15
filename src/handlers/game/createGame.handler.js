@@ -6,11 +6,14 @@ import { HANDLER_IDS, RESPONSE_SUCCESS_CODE } from '../../constants/handlerIds.j
 import { getUserById } from '../../session/user.session.js';
 import CustomError from '../../utils/error/customError.js';
 import { ErrorCodes } from '../../utils/error/errorCodes.js';
+import { findGameEndByUserID } from '../../db/user/user.db.js';
 
-const createGameHandler = ({ socket, userId, payload }) => {
+const createGameHandler = async ({ socket, userId, payload }) => {
   try {
     const gameId = uuidv4();
     const gameSession = addGameSession(gameId);
+
+    let { playerId } = payload;
 
     const user = getUserById(userId);
     if (!user) {
@@ -18,12 +21,25 @@ const createGameHandler = ({ socket, userId, payload }) => {
     }
     gameSession.addUser(user);
 
-    console.log('gameSession : ', gameSession);
+    let x = 0;
+    let y = 0;
+    const history = await findGameEndByUserID(userId);
+
+    if (history) {
+      x = history.locX;
+      y = history.locY;
+      playerId = history.playerId;
+      //console.log(`History playerId: ${history.playerId}`);
+    }
+
+    //console.log(history);
+
+    //console.log(`Location : ${x} , ${y}`);
 
     const createGameResponse = createResponse(
       HANDLER_IDS.CREATE_GAME,
       RESPONSE_SUCCESS_CODE,
-      { gameId, message: '게임이 생성되었습니다.' },
+      { gameId, playerId, x, y, message: '게임이 생성되었습니다.' },
       userId,
     );
 

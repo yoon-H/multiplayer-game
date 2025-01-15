@@ -17,5 +17,6 @@ export const packetNames = {
     CreateGamePayload: 'game.CreateGamePayload',
     JoinGamePayload: 'game.JoinGamePayload',
     LocationUpdatePayload: 'game.LocationUpdatePayload',
+    EndGamePayload: 'game.EndGamePayload',
   },
 };
