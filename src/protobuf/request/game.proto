@@ -29,3 +29,7 @@ message EndGamePayload {
   uint32 score = 4;
   uint32 playerId = 5;
 }
+
+message GetAllGameSessionsPayload {
+  int64 timestamp = 1;
+}

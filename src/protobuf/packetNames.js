@@ -14,9 +14,11 @@ export const packetNames = {
     Response: 'response.Response',
   },
   game: {
+    GetAllGameSessionsPayload: 'game.GetAllGameSessionsPayload',
     CreateGamePayload: 'game.CreateGamePayload',
     JoinGamePayload: 'game.JoinGamePayload',
     LocationUpdatePayload: 'game.LocationUpdatePayload',
     EndGamePayload: 'game.EndGamePayload',
   },
 };
+GetAllGameSessionsPayload;
