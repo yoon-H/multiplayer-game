@@ -16,3 +16,19 @@ export const createUser = async (deviceId) => {
 export const updateUserLogin = async (id) => {
   await pools.USER_DB.query(SQL_QUERIES.UPDATE_USER_LOGIN, [id]);
 };
+
+export const findGameEndByUserID = async (userId) => {
+  const [rows] = await pools.USER_DB.query(SQL_QUERIES.FIND_GAME_END_BY_USER_ID, [userId]);
+  return rows[0];
+};
+
+export const creteGameEnd = async (values) => {
+  const id = uuidv4();
+  await pools.USER_DB.query(SQL_QUERIES.CREATE_GAME_END, [id, ...values]);
+  return;
+};
+
+export const updateGameEnd = async (values) => {
+  await pools.USER_DB.query(SQL_QUERIES.UPDATE_GAME_END, [values]);
+  return;
+};
