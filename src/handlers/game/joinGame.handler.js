@@ -5,10 +5,12 @@ import { HANDLER_IDS, RESPONSE_SUCCESS_CODE } from '../../constants/handlerIds.j
 import { getUserById } from '../../session/user.session.js';
 import CustomError from '../../utils/error/customError.js';
 import { ErrorCodes } from '../../utils/error/errorCodes.js';
+import { findGameEndByUserID } from '../../db/user/user.db.js';
 
-const joinGameHandler = ({ socket, userId, payload }) => {
+const joinGameHandler = async ({ socket, userId, payload }) => {
   try {
     const { gameId } = payload;
+    let { playerId } = payload;
     const gameSession = getGameSession(gameId);
 
     if (!gameSession) {
@@ -24,10 +26,21 @@ const joinGameHandler = ({ socket, userId, payload }) => {
       gameSession.addUser(user);
     }
 
+    let x = 0;
+    let y = 0;
+    const history = await findGameEndByUserID(userId);
+
+    if (history) {
+      x = history.locX;
+      y = history.locY;
+      playerId = history.playerId;
+      //console.log(`History playerId: ${history.playerId}`);
+    }
+
     const joinGameResponse = createResponse(
       HANDLER_IDS.JOIN_GAME,
       RESPONSE_SUCCESS_CODE,
-      { gameId, message: '게임에 참가했습니다.' },
+      { gameId, playerId, x, y, message: '게임에 참가했습니다.' },
       user.id,
     );
     socket.write(joinGameResponse);
