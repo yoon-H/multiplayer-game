@@ -22,13 +22,13 @@ export const findGameEndByUserID = async (userId) => {
   return rows[0];
 };
 
-export const creteGameEnd = async (values) => {
+export const createGameEnd = async (values) => {
   const id = uuidv4();
   await pools.USER_DB.query(SQL_QUERIES.CREATE_GAME_END, [id, ...values]);
   return;
 };
 
 export const updateGameEnd = async (values) => {
-  await pools.USER_DB.query(SQL_QUERIES.UPDATE_GAME_END, [values]);
+  await pools.USER_DB.query(SQL_QUERIES.UPDATE_GAME_END, values);
   return;
 };

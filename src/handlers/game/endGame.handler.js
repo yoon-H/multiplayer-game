@@ -4,6 +4,8 @@ import CustomError from '../../utils/error/customError.js';
 import { handleError } from '../../utils/error/error.handler.js';
 import { ErrorCodes } from '../../utils/error/errorCodes.js';
 import { createResponse } from '../../utils/response/createResponse.js';
+import { getUserById } from '../../session/user.session.js';
+import { HANDLER_IDS, RESPONSE_SUCCESS_CODE } from '../../constants/handlerIds.js';
 
 const endGameHander = async ({ socket, userId, payload }) => {
   try {
@@ -22,7 +24,8 @@ const endGameHander = async ({ socket, userId, payload }) => {
     // 게임 세션에서 유저 제외
     gameSession.removeUser(userId);
 
-    if (gameSession.getState === 'dead') {
+    const gameState = gameSession.getState();
+    if (gameState === 'dead') {
       removeGameSession(gameId);
     }
 
@@ -30,15 +33,15 @@ const endGameHander = async ({ socket, userId, payload }) => {
     let history = await findGameEndByUserID(userId);
 
     if (!history) {
-      await createGameEnd([userId, x, y, score]);
+      await createGameEnd([userId, x, y, score.toNumber()]);
     } else {
-      await updateGameEnd([userId, x, y, score]);
+      await updateGameEnd([ x, y, score.toNumber(), userId]);
     }
 
     const createGameResponse = createResponse(
-      HANDLER_IDS.CREATE_GAME,
+      HANDLER_IDS.END_GAME,
       RESPONSE_SUCCESS_CODE,
-      { gameId, message: '게임이 생성되었습니다.' },
+      { gameId, state: gameState, message: '게임에서 나갔습니다.' },
       userId,
     );
 
