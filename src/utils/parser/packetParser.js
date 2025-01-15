@@ -34,11 +34,11 @@ export const packetParser = (data) => {
     throw new CustomError(ErrorCodes.UNKNOWN_HANDLER_ID, `알 수 없는 핸들러 ID: ${handlerId}`);
   }
 
-  console.log(`data : ${data}`);
-  console.log(`handlerId : `, packet.handlerId);
-  console.log(`protoTypeName : ${protoTypeName}`);
-  console.log(`packet : `, packet);
-  console.log(`packet.payload : ${packet.payload}`);
+  // console.log(`data : ${data}`);
+  // console.log(`handlerId : `, packet.handlerId);
+  // console.log(`protoTypeName : ${protoTypeName}`);
+  // console.log(`packet : `, packet);
+  // console.log(`packet.payload : ${packet.payload}`);
 
   const [namespace, typeName] = protoTypeName.split('.');
   const PayloadType = protoMessages[namespace][typeName];

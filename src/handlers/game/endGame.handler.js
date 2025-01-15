@@ -9,7 +9,7 @@ import { HANDLER_IDS, RESPONSE_SUCCESS_CODE } from '../../constants/handlerIds.j
 
 const endGameHandler = async ({ socket, userId, payload }) => {
   try {
-    const { gameId, x, y, score } = payload;
+    const { gameId, playerId, x, y, score } = payload;
 
     const user = getUserById(userId);
     if (!user) {
@@ -29,13 +29,15 @@ const endGameHandler = async ({ socket, userId, payload }) => {
       removeGameSession(gameId);
     }
 
+    //console.log(`Type of playerId : ${typeof playerId}`);
+
     // 마지막 위치 추가
     let history = await findGameEndByUserID(userId);
 
     if (!history) {
-      await createGameEnd([userId, x, y, score]);
+      await createGameEnd([userId, playerId, x, y, score]);
     } else {
-      await updateGameEnd([x, y, score, userId]);
+      await updateGameEnd([playerId, x, y, score, userId]);
     }
 
     const createGameResponse = createResponse(

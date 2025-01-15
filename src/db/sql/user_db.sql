@@ -10,6 +10,7 @@ CREATE TABLE IF NOT EXISTS game_end
 (
     id    VARCHAR(36) PRIMARY KEY,
     user_id    VARCHAR(36) NOT NULL,
+    player_id INT NOT NULL,
     loc_x      float DEFAULT 0,
     loc_y      float DEFAULT 0,
     score      INT       DEFAULT 0,
