@@ -6,11 +6,16 @@ import createGameHandler from './game/createGame.handler.js';
 import joinGameHandler from './game/joinGame.handler.js';
 import updateLocationHandler from './game/updateLocation.handler.js';
 import endGameHandler from './game/endGame.handler.js';
+import getGameSessionsHandler from './game/getGameSessions.handler.js';
 
 const handlers = {
   [HANDLER_IDS.INITIAL]: {
     handler: initialHandler,
     protoType: 'initial.InitialPayload',
+  },
+  [HANDLER_IDS.GET_ALL_GAME_SESSIONS]: {
+    handler: getGameSessionsHandler,
+    protoType: 'game.GetAllGameSessionsPayload',
   },
   [HANDLER_IDS.CREATE_GAME]: {
     handler: createGameHandler,

@@ -15,13 +15,13 @@ class Game {
   }
 
   addUser(user) {
-    if (this.users.length >= MAX_PLAYERS) {
+    if (this.users.size >= MAX_PLAYERS) {
       throw new Error('Game session is full');
     }
     this.users.set(user.id, user);
 
     this.intervalManager.addPlayer(user.id, user.ping.bind(user), 1000);
-    if (this.users.length === MAX_PLAYERS) {
+    if (this.users.size === MAX_PLAYERS) {
       setTimeout(() => {
         this.startGame();
       }, 3000);
@@ -36,9 +36,11 @@ class Game {
     this.users.delete(userId);
     this.intervalManager.removePlayer(userId);
 
-    if (this.users.length < MAX_PLAYERS) {
+    if (this.users.size < MAX_PLAYERS) {
       this.state = 'waiting';
-    } else if (this.users.length <= 0) {
+    }
+
+    if (this.users.size <= 0) {
       this.state = 'dead';
     }
   }
@@ -57,12 +59,12 @@ class Game {
 
   startGame() {
     this.state = 'inProgress';
-    const startPacket = gameStartNotification(this.id, Date.now());
+    //const startPacket = gameStartNotification(this.id, Date.now());
     console.log(this.getMaxLatency());
 
-    this.users.forEach((user) => {
-      user.socket.write(startPacket);
-    });
+    // this.users.forEach((user) => {
+    //   user.socket.write(startPacket);
+    // });
   }
 
   getAllLocation() {
