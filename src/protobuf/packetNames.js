@@ -21,4 +21,3 @@ export const packetNames = {
     EndGamePayload: 'game.EndGamePayload',
   },
 };
-GetAllGameSessionsPayload;

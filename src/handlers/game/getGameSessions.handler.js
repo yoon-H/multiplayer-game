@@ -1,6 +1,7 @@
 import { getAllGameSessions } from '../../session/game.session.js';
 import { handleError } from '../../utils/error/error.handler.js';
 import { HANDLER_IDS, RESPONSE_SUCCESS_CODE } from '../../constants/handlerIds.js';
+import { createResponse } from '../../utils/response/createResponse.js';
 
 const getGameSessionsHandler = ({ socket, userId, payload }) => {
   try {
@@ -8,7 +9,7 @@ const getGameSessionsHandler = ({ socket, userId, payload }) => {
 
     let gameInfos = [];
     gameSessions.forEach((item) => {
-      gameInfos.push[(item.id, item.state)];
+      gameInfos.push({gameId : item.id, state : item.state});
     });
 
     const getGameSessionsResponse = createResponse(
