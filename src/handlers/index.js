@@ -5,7 +5,7 @@ import { ErrorCodes } from '../utils/error/errorCodes.js';
 import createGameHandler from './game/createGame.handler.js';
 import joinGameHandler from './game/joinGame.handler.js';
 import updateLocationHandler from './game/updateLocation.handler.js';
-import endGameHander from './game/endGame.handler.js';
+import endGameHandler from './game/endGame.handler.js';
 
 const handlers = {
   [HANDLER_IDS.INITIAL]: {
@@ -25,7 +25,7 @@ const handlers = {
     protoType: 'game.LocationUpdatePayload',
   },
   [HANDLER_IDS.END_GAME]: {
-    handler: endGameHander,
+    handler: endGameHandler,
     protoType: 'game.EndGamePayload',
   },
   // 다른 핸들러들을 추가

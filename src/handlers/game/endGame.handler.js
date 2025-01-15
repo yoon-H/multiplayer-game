@@ -7,7 +7,7 @@ import { createResponse } from '../../utils/response/createResponse.js';
 import { getUserById } from '../../session/user.session.js';
 import { HANDLER_IDS, RESPONSE_SUCCESS_CODE } from '../../constants/handlerIds.js';
 
-const endGameHander = async ({ socket, userId, payload }) => {
+const endGameHandler = async ({ socket, userId, payload }) => {
   try {
     const { gameId, x, y, score } = payload;
 
@@ -33,9 +33,9 @@ const endGameHander = async ({ socket, userId, payload }) => {
     let history = await findGameEndByUserID(userId);
 
     if (!history) {
-      await createGameEnd([userId, x, y, score.toNumber()]);
+      await createGameEnd([userId, x, y, score]);
     } else {
-      await updateGameEnd([ x, y, score.toNumber(), userId]);
+      await updateGameEnd([x, y, score, userId]);
     }
 
     const createGameResponse = createResponse(
@@ -51,4 +51,4 @@ const endGameHander = async ({ socket, userId, payload }) => {
   }
 };
 
-export default endGameHander;
+export default endGameHandler;
