@@ -1,8 +1,12 @@
+import { getGameSession, removeGameSession } from '../../session/game.session.js';
+import { gameSessions, userSessions } from '../../session/sessions.js';
+import { removeUser } from '../../session/user.session.js';
 import { createPingPacket } from '../../utils/notification/game.notification.js';
 
 class User {
   constructor(id, socket, playerId) {
     this.id = id;
+    this.gameId = '';
     this.socket = socket;
     this.playerId = playerId;
     this.latency = 0;
@@ -13,6 +17,7 @@ class User {
     this.y = 0;
     this.sequence = 0;
     this.lastUpdateTime = Date.now();
+    this.lastPongTime = Date.now();
   }
 
   getPlayerId() {
@@ -21,6 +26,14 @@ class User {
 
   setPlayerId(id) {
     this.playerId = id;
+  }
+
+  setGameId(id) {
+    this.gameId = id;
+  }
+
+  getGameId() {
+    return this.gameId;
   }
 
   setSpeed(speed) {
@@ -65,8 +78,33 @@ class User {
     this.socket.write(createPingPacket(now));
   }
 
+  checkPong() {
+    const now = Date.now();
+
+    if (now - this.lastPongTime > 10000) {
+      if (this.gameId !== '') {
+        const gameSession = getGameSession(this.gameId);
+
+        if (gameSession) {
+          // 게임 세션에서 유저 제외
+          gameSession.removeUser(this.id);
+
+          const gameState = gameSession.getState();
+          if (gameState === 'dead') {
+            removeGameSession(this.gameId);
+          }
+        }
+      }
+
+      removeUser(this.id);
+
+      this.socket.destroy();
+    }
+  }
+
   handlePong(data) {
     const now = Date.now();
+    this.lastPongTime = now;
     this.latency = (now - data.timestamp) / 2;
     //console.log(`Received pong from user ${this.id} at ${now} with latency ${this.latency}ms`);
   }

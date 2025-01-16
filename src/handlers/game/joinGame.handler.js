@@ -39,6 +39,7 @@ const joinGameHandler = async ({ socket, userId, payload }) => {
     user.setPosition(x, y);
     user.setPlayerId(playerId);
     user.setSpeed(speed);
+    user.setGameId(gameId);
 
     const joinGameResponse = createResponse(
       HANDLER_IDS.JOIN_GAME,

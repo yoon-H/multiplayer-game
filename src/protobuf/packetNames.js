@@ -19,5 +19,6 @@ export const packetNames = {
     JoinGamePayload: 'game.JoinGamePayload',
     LocationUpdatePayload: 'game.LocationUpdatePayload',
     EndGamePayload: 'game.EndGamePayload',
+    DisConnectPacket: 'game.DisConnectPacket',
   },
 };

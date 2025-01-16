@@ -34,6 +34,7 @@ const createGameHandler = async ({ socket, userId, payload }) => {
     user.setPosition(x, y);
     user.setPlayerId(playerId);
     user.setSpeed(speed);
+    user.setGameId(gameId);
 
     const createGameResponse = createResponse(
       HANDLER_IDS.CREATE_GAME,

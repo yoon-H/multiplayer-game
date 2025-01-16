@@ -7,6 +7,7 @@ import joinGameHandler from './game/joinGame.handler.js';
 import updateLocationHandler from './game/updateLocation.handler.js';
 import endGameHandler from './game/endGame.handler.js';
 import getGameSessionsHandler from './game/getGameSessions.handler.js';
+import disconnectHandler from './game/disconnect.handler.js';
 
 const handlers = {
   [HANDLER_IDS.INITIAL]: {
@@ -32,6 +33,10 @@ const handlers = {
   [HANDLER_IDS.END_GAME]: {
     handler: endGameHandler,
     protoType: 'game.EndGamePayload',
+  },
+  [HANDLER_IDS.DISCONNECT]: {
+    handler: disconnectHandler,
+    protoType: 'game.DisConnectPacket',
   },
   // 다른 핸들러들을 추가
 };
