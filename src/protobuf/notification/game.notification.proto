@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+package gameNotification;
+
+message LocationUpdate {
+  repeated UserLocation users = 1;
+}
+
+message UserLocation {
+    string id = 1;          // 유저 아이디
+    uint32 playerId = 2;    // 플레이어 아이디(종류)
+    float x = 3;            // x 좌표
+    float y = 4;            // y 좌표
+}
+
+// 게임 시작 알림
+message Start {
+  string gameId = 1;
+  int64 timestamp = 2;
+}

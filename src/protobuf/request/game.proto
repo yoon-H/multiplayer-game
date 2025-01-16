@@ -1,0 +1,37 @@
+syntax = "proto3";
+
+package game;
+
+// 게임 생성 핸들러 payload
+message CreateGamePayload {
+  int64 timestamp = 1;       // 게임 생성 시각
+  uint32 playerId = 2;
+  float speed = 3;
+}
+
+// 게임 참가 핸들러 payload
+message JoinGamePayload {
+  string gameId = 1;         // 게임 ID (UUID)
+  uint32 playerId = 2;       
+  float speed = 3;
+}
+
+// 위치 정보 업데이트
+message LocationUpdatePayload {
+  string gameId = 1;
+  float dx = 2;
+  float dy = 3;
+}
+
+// 게임 종료 핸들러 
+message EndGamePayload {
+  string gameId = 1;
+  float x = 2;
+  float y = 3;
+  uint32 score = 4;
+  uint32 playerId = 5;
+}
+
+message GetAllGameSessionsPayload {
+  int64 timestamp = 1;
+}

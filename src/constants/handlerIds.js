@@ -1,0 +1,10 @@
+export const RESPONSE_SUCCESS_CODE = 0;
+
+export const HANDLER_IDS = {
+  INITIAL: 0,
+  GET_ALL_GAME_SESSIONS: 1,
+  CREATE_GAME: 4,
+  JOIN_GAME: 5,
+  UPDATE_LOCATION: 6,
+  END_GAME: 7,
+};
