@@ -61,23 +61,20 @@ class User {
   ping() {
     const now = Date.now();
 
-    console.log(`${this.id}: ping`);
+    //console.log(`${this.id}: ping`);
     this.socket.write(createPingPacket(now));
   }
 
   handlePong(data) {
     const now = Date.now();
     this.latency = (now - data.timestamp) / 2;
-    console.log(`Received pong from user ${this.id} at ${now} with latency ${this.latency}ms`);
+    //console.log(`Received pong from user ${this.id} at ${now} with latency ${this.latency}ms`);
   }
 
   // 추측항법을 사용하여 위치를 추정하는 메서드
   calculatePosition(latency) {
     const timeDiff = latency / 1000; // 레이턴시를 초 단위로 계산
     const distance = this.speed * timeDiff;
-
-    //console.log('calc : ', this.dx, this.dy, this.speed, timeDiff, distance);
-    //console.log('x:', this.x + this.dx * distance, 'y:', this.y + this.dy * distance);
 
     // x, y 축에서 이동한 거리 계산
     return {

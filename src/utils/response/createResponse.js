@@ -13,8 +13,6 @@ export const createResponse = (handlerId, responseCode, data = null, userId) => 
     data: data ? Buffer.from(JSON.stringify(data)) : null, // 문자열화해서 버퍼객체로 만들기
   };
 
-  console.log('response', handlerId, Date.now());
-
   const buffer = Response.encode(responsePayload).finish();
 
   // 패킷 길이 정보를 포함한 버퍼 생성

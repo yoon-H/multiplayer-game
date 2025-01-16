@@ -61,12 +61,6 @@ class Game {
 
   startGame() {
     this.state = 'inProgress';
-    //const startPacket = gameStartNotification(this.id, Date.now());
-    console.log(this.getMaxLatency());
-
-    // this.users.forEach((user) => {
-    //   user.socket.write(startPacket);
-    // });
   }
 
   getAllLocation() {
@@ -76,8 +70,7 @@ class Game {
     this.users.forEach((user) => {
       const { x, y } = user.calculatePosition(maxLatency);
       const playerId = user.getPlayerId();
-      //console.log('user :', user);
-      console.log('location : ', user.id, playerId, x, y);
+
       locationData.push({ id: user.id, playerId, x, y });
     });
 

@@ -29,8 +29,6 @@ const endGameHandler = async ({ socket, userId, payload }) => {
       removeGameSession(gameId);
     }
 
-    //console.log(`Type of playerId : ${typeof playerId}`);
-
     // 마지막 위치 추가
     let history = await findGameEndByUserID(userId);
 

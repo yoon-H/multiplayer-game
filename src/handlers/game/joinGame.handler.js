@@ -34,7 +34,6 @@ const joinGameHandler = async ({ socket, userId, payload }) => {
       x = history.locX;
       y = history.locY;
       playerId = history.playerId;
-      //console.log(`History playerId: ${history.playerId}`);
     }
 
     user.setPosition(x, y);
@@ -47,6 +46,7 @@ const joinGameHandler = async ({ socket, userId, payload }) => {
       { gameId, playerId, x, y, message: '게임에 참가했습니다.' },
       user.id,
     );
+
     socket.write(joinGameResponse);
   } catch (error) {
     handleError(socket, error);

@@ -7,9 +7,6 @@ const updateLocationHandler = ({ socket, userId, payload }) => {
   try {
     const { gameId, dx, dy } = payload;
 
-    //console.log('payLoad : ', payload);
-    //console.log('payload : ', userId, x, y);
-
     const gameSession = getGameSession(gameId);
 
     if (!gameSession) {
