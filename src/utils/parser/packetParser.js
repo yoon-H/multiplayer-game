@@ -43,7 +43,7 @@ export const packetParser = (data) => {
   const [namespace, typeName] = protoTypeName.split('.');
   const PayloadType = protoMessages[namespace][typeName];
 
-  console.log(`PayloadType : ${namespace}.${typeName}`);
+  //console.log(`PayloadType : ${namespace}.${typeName}`);
 
 
   let payload;

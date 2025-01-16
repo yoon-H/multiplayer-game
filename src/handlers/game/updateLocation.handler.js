@@ -5,10 +5,10 @@ import { ErrorCodes } from '../../utils/error/errorCodes.js';
 
 const updateLocationHandler = ({ socket, userId, payload }) => {
   try {
-    const { gameId, x, y } = payload;
+    const { gameId, dx, dy } = payload;
 
     //console.log('payLoad : ', payload);
-    console.log('payload : ', userId, x, y);
+    //console.log('payload : ', userId, x, y);
 
     const gameSession = getGameSession(gameId);
 
@@ -20,7 +20,8 @@ const updateLocationHandler = ({ socket, userId, payload }) => {
     if (!user) {
       throw new CustomError(ErrorCodes.USER_NOT_FOUND, '유저를 찾을 수 없습니다.');
     }
-    user.updatePosition(x, y);
+    user.updatePosition();
+    user.setInput(dx, dy);
     const packet = gameSession.getAllLocation();
 
     socket.write(packet);
