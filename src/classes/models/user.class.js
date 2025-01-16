@@ -76,9 +76,6 @@ class User {
     const timeDiff = latency / 1000; // 레이턴시를 초 단위로 계산
     const distance = this.speed * timeDiff;
 
-    //console.log('calc : ', this.dx, this.dy, this.speed, timeDiff, distance);
-    //console.log('x:', this.x + this.dx * distance, 'y:', this.y + this.dy * distance);
-
     // x, y 축에서 이동한 거리 계산
     return {
       x: this.x + this.dx * distance,
