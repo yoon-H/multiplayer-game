@@ -61,12 +61,6 @@ class Game {
 
   startGame() {
     this.state = 'inProgress';
-    //const startPacket = gameStartNotification(this.id, Date.now());
-    console.log(this.getMaxLatency());
-
-    // this.users.forEach((user) => {
-    //   user.socket.write(startPacket);
-    // });
   }
 
   getAllLocation() {

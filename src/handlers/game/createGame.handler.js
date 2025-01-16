@@ -29,7 +29,6 @@ const createGameHandler = async ({ socket, userId, payload }) => {
       x = history.locX;
       y = history.locY;
       playerId = history.playerId;
-      //console.log(`History playerId: ${history.playerId}`);
     }
 
     user.setPosition(x, y);
