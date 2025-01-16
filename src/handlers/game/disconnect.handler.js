@@ -3,7 +3,6 @@ import CustomError from '../../utils/error/customError.js';
 import { handleError } from '../../utils/error/error.handler.js';
 import { ErrorCodes } from '../../utils/error/errorCodes.js';
 import { getUserById, removeUser } from '../../session/user.session.js';
-import { gameSessions, userSessions } from '../../session/sessions.js';
 
 const disconnectHandler = async ({ socket, userId, payload }) => {
   try {
@@ -30,7 +29,9 @@ const disconnectHandler = async ({ socket, userId, payload }) => {
 
     removeUser(userId);
 
-    socket.destroy();
+    if (!socket.destroyed) {
+      socket.destroy();
+    }
   } catch (error) {
     handleError(socket, error);
   }

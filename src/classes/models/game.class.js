@@ -22,6 +22,7 @@ class Game {
 
     this.intervalManager.addPlayer(user.id, user.ping.bind(user), 1000);
     this.intervalManager.addUpdatePosition(user.id, user.updatePosition.bind(user), 200);
+    this.intervalManager.addPlayer(user.id, user.checkPong.bind(user), 1000, 'pong');
 
     if (this.users.size === MAX_PLAYERS) {
       setTimeout(() => {
