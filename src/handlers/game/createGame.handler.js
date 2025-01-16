@@ -32,6 +32,8 @@ const createGameHandler = async ({ socket, userId, payload }) => {
       //console.log(`History playerId: ${history.playerId}`);
     }
 
+    user.setPlayerId(playerId);
+
     //console.log(history);
 
     //console.log(`Location : ${x} , ${y}`);

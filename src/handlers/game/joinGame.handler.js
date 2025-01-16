@@ -37,6 +37,8 @@ const joinGameHandler = async ({ socket, userId, payload }) => {
       //console.log(`History playerId: ${history.playerId}`);
     }
 
+    user.setPlayerId(playerId);
+
     const joinGameResponse = createResponse(
       HANDLER_IDS.JOIN_GAME,
       RESPONSE_SUCCESS_CODE,

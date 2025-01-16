@@ -15,8 +15,8 @@ export const removeGameSession = (id) => {
 };
 
 export const getGameSession = (id) => {
-  console.log(id);
-  console.log(gameSessions);
+  //console.log(id);
+  //console.log(gameSessions);
 
   return gameSessions.get(id);
 };

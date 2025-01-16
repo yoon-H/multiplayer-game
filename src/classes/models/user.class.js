@@ -5,6 +5,7 @@ class User {
     this.id = id;
     this.socket = socket;
     this.playerId = playerId;
+    this.latency = 0;
     this.x = 0;
     this.y = 0;
     this.sequence = 0;
@@ -13,6 +14,10 @@ class User {
 
   getPlayerId() {
     return this.playerId;
+  }
+
+  setPlayerId(id) {
+    this.playerId = id;
   }
 
   initInfo(x, y, playerId) {
