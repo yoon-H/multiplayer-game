@@ -7,4 +7,5 @@ export const HANDLER_IDS = {
   JOIN_GAME: 5,
   UPDATE_LOCATION: 6,
   END_GAME: 7,
+  DISCONNECT: 8,
 };

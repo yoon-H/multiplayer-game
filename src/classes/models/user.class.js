@@ -3,6 +3,7 @@ import { createPingPacket } from '../../utils/notification/game.notification.js'
 class User {
   constructor(id, socket, playerId) {
     this.id = id;
+    this.gameId = '';
     this.socket = socket;
     this.playerId = playerId;
     this.latency = 0;
@@ -21,6 +22,14 @@ class User {
 
   setPlayerId(id) {
     this.playerId = id;
+  }
+
+  setGameId(id) {
+    this.gameId = id;
+  }
+
+  getGameId() {
+    return this.gameId;
   }
 
   setSpeed(speed) {
@@ -61,14 +70,14 @@ class User {
   ping() {
     const now = Date.now();
 
-    //console.log(`${this.id}: ping`);
+    console.log(`${this.id}: ping`);
     this.socket.write(createPingPacket(now));
   }
 
   handlePong(data) {
     const now = Date.now();
     this.latency = (now - data.timestamp) / 2;
-    //console.log(`Received pong from user ${this.id} at ${now} with latency ${this.latency}ms`);
+    console.log(`Received pong from user ${this.id} at ${now} with latency ${this.latency}ms`);
   }
 
   // 추측항법을 사용하여 위치를 추정하는 메서드

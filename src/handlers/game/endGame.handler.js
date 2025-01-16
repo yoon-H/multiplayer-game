@@ -23,6 +23,7 @@ const endGameHandler = async ({ socket, userId, payload }) => {
 
     // 게임 세션에서 유저 제외
     gameSession.removeUser(userId);
+    user.setGameId('');
 
     const gameState = gameSession.getState();
     if (gameState === 'dead') {
