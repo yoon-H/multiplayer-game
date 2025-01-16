@@ -21,6 +21,8 @@ class Game {
     this.users.set(user.id, user);
 
     this.intervalManager.addPlayer(user.id, user.ping.bind(user), 1000);
+    this.intervalManager.addUpdatePosition(user.id, user.updatePosition.bind(user), 200);
+
     if (this.users.size === MAX_PLAYERS) {
       setTimeout(() => {
         this.startGame();

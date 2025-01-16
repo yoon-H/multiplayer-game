@@ -13,7 +13,7 @@ const createGameHandler = async ({ socket, userId, payload }) => {
     const gameId = uuidv4();
     const gameSession = addGameSession(gameId);
 
-    let { playerId } = payload;
+    let { playerId, speed } = payload;
 
     const user = getUserById(userId);
     if (!user) {
@@ -32,7 +32,9 @@ const createGameHandler = async ({ socket, userId, payload }) => {
       //console.log(`History playerId: ${history.playerId}`);
     }
 
+    user.setPosition(x, y);
     user.setPlayerId(playerId);
+    user.setSpeed(speed);
 
     //console.log(history);
 

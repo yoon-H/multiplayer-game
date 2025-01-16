@@ -6,19 +6,21 @@ package game;
 message CreateGamePayload {
   int64 timestamp = 1;       // 게임 생성 시각
   uint32 playerId = 2;
+  float speed = 3;
 }
 
 // 게임 참가 핸들러 payload
 message JoinGamePayload {
   string gameId = 1;         // 게임 ID (UUID)
-  int64 timestamp = 2;       // 게임 참가 시각
+  uint32 playerId = 2;       
+  float speed = 3;
 }
 
 // 위치 정보 업데이트
 message LocationUpdatePayload {
   string gameId = 1;
-  float x = 2;      // x 좌표
-  float y = 3;      // y 좌표
+  float dx = 2;
+  float dy = 3;
 }
 
 // 게임 종료 핸들러 

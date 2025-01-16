@@ -10,7 +10,7 @@ import { findGameEndByUserID } from '../../db/user/user.db.js';
 const joinGameHandler = async ({ socket, userId, payload }) => {
   try {
     const { gameId } = payload;
-    let { playerId } = payload;
+    let { playerId, speed } = payload;
     const gameSession = getGameSession(gameId);
 
     if (!gameSession) {
@@ -37,7 +37,9 @@ const joinGameHandler = async ({ socket, userId, payload }) => {
       //console.log(`History playerId: ${history.playerId}`);
     }
 
+    user.setPosition(x, y);
     user.setPlayerId(playerId);
+    user.setSpeed(speed);
 
     const joinGameResponse = createResponse(
       HANDLER_IDS.JOIN_GAME,
